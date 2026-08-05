@@ -1,0 +1,38 @@
+# TARGETED INPUT FILES
+INPUT                  = src/kernel/fork.c \
+                         src/kernel/exit.c \
+                         src/kernel/exit.h \
+                         src/kernel/kthread.c \
+                         src/include/linux/kthread.h
+
+# avoid recursive parsing for faster creation
+RECURSIVE              = NO
+
+INCLUDE_PATH           = src/include/linux \
+                         src/include/uapi \
+                         src/arch/x86/include/ \
+                         src/mm/
+                         
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+
+# GRAPHVIZ / CALL GRAPH CONFIGURATION
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_XML           = NO
+
+# Graph / Visualization Settings (requires graphviz installed)
+HAVE_DOT               = YES
+MAX_DOT_GRAPH_DEPTH    = 2
+DOT_IMAGE_FORMAT       = svg
+DOT_TRANSPARENT        = NO
+
+CLASS_DIAGRAMS         = NO
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+GENERATE_LEGEND        = YES
+
+# parallel processing for Graphviz (CPU core count)
+DOT_NUM_THREADS        = 4
