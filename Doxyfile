@@ -6,7 +6,11 @@ INPUT                  = src/kernel/fork.c \
                          src/include/linux/kthread.h
 
 # avoid recursive parsing for faster creation
-RECURSIVE              = NO
+RECURSIVE              = YES
+
+# Keep Doxygen focused by excluding heavy subdirectories you don't need
+EXCLUDE                = arch/x86/include/asm/kvm \
+                         include/linux/mod_devicetable.h
 
 INCLUDE_PATH           = src/include/linux \
                          src/include/uapi \
@@ -23,16 +27,52 @@ GENERATE_MAN           = NO
 GENERATE_RTF           = NO
 GENERATE_XML           = NO
 
+GENERATE_HTML          = YES
+HTML_DYNAMIC_SECTIONS  = NO
+HTML_CODE_FOLDING      = YES
+TOC_INCLUDE_HEADINGS   = 3
+
 # Graph / Visualization Settings (requires graphviz installed)
 HAVE_DOT               = YES
-MAX_DOT_GRAPH_DEPTH    = 2
+DOT_GRAPH_MAX_NODES    = 200
+MAX_DOT_GRAPH_DEPTH    = 3
 DOT_IMAGE_FORMAT       = svg
-DOT_TRANSPARENT        = NO
+INTERACTIVE_SVG        = NO
+DOT_MULTI_TARGETS      = YES
 
 CLASS_DIAGRAMS         = NO
 CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
 GENERATE_LEGEND        = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
 
-# parallel processing for Graphviz (CPU core count)
+# Directory & Include Visualizations
+SHOW_DIRECTORIES       = YES
+DIRECTORY_GRAPH        = YES
+ENABLE_PREPROCESSING   = YES
+SEARCH_INCLUDES        = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+
+# parallel processing (CPU core count)
 DOT_NUM_THREADS        = 4
+
+# output dir setup
+OUTPUT_DIRECTORY       = .
+HTML_OUTPUT            = html
+
+# Custom Project Header
+PROJECT_NAME           = "Multithreading"
+PROJECT_NUMBER         = "v7.0"
+PROJECT_BRIEF          = "Documentation via Doxygen and Graphviz"
+
+# Enable Left Sidepanel with Tree View Navigation
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 250
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = YES
+
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+HTML_INDEX_NUM_ENTRIES = 100
