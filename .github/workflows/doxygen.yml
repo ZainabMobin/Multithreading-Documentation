@@ -14,7 +14,18 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
-
+        
+      - name: Sparse Checkout Linux Kernel Source (v7.0)
+        run: |
+          mkdir -p src
+          cd src
+          git init
+          git remote add origin https://github.com/torvalds/linux.git
+          git config core.sparseCheckout true
+          git sparse-checkout set kernel include/linux include/uapi mm arch/x86/include
+          git fetch --filter=blob:none --depth=1 origin tag v7.0
+          git checkout FETCH_HEAD
+          
       - name: Install Doxygen and Graphviz
         run: |
           sudo apt-get update
