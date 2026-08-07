@@ -3,6 +3,7 @@ INPUT                  = src/kernel/fork.c \
                          src/kernel/exit.c \
                          src/kernel/exit.h \
                          src/kernel/kthread.c \
+                         src/kernel/sched/core.c \
                          src/include/linux/kthread.h
 
 # avoid recursive parsing for faster creation
