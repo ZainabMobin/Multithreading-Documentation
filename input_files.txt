@@ -1,0 +1,7 @@
+INPUT        += src/include/linux/sched.h \
+                src/include/linux/kthread.h \
+                src/kernel/fork.c \
+                src/kernel/exit.c \
+                src/kernel/exit.h \
+                src/kernel/kthread.c \
+                src/kernel/sched/core.c

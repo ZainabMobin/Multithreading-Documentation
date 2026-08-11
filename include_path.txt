@@ -1,0 +1,4 @@
+INCLUDE_PATH     += src/include \
+                    src/arch/x86/include \
+                    src/kernel \
+                    src/mm

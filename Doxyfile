@@ -1,79 +1,173 @@
-# TARGETED INPUT FILES
-INPUT                  = src/kernel/fork.c \
-                         src/kernel/exit.c \
-                         src/kernel/exit.h \
-                         src/kernel/kthread.c \
-                         src/kernel/sched/core.c \
-                         src/include/linux/sched.h \
-                         src/include/linux/kthread.h
+# PROJECT DETAILS
+PROJECT_NAME           = "Multithreading"
+PROJECT_NUMBER         = "v7.0"
+PROJECT_BRIEF          = "Documentation via Doxygen and Graphviz"
+OUTPUT_DIRECTORY       = .
+HTML_OUTPUT            = html
 
-# avoid recursive parsing for faster creation
+
+# INPUT FILES/ INCLUDE & EXCLUDE FILE PATHS
+@INCLUDE = input_files.txt
+@INCLUDE = include_path.txt
+@EXCLUDE = exclude_path.txt
+
+INPUT_FILTER           = ./doxygen_kernel_filter.sh
+FILTER_SOURCE_FILES    = YES
+
 RECURSIVE              = YES
+EXTENSION_MAPPING      = h=C # Ensures .h headers are explicitly treated as C files (Fixes kthread.h / sched.h missing symbols)
+FILE_PATTERNS          = *.c *.h # Forces Doxygen to parse all .c and .h files even without explicit @file directives
 
-# Keep Doxygen focused by excluding heavy subdirectories you don't need
-EXCLUDE                = arch/x86/include/asm/kvm \
-                         include/linux/mod_devicetable.h
 
-INCLUDE_PATH           = src/include/linux \
-                         src/include/uapi \
-                         src/arch/x86/include/ \
-                         src/mm/
-                         
+# DOCUMENTATION & EXTRACTION DETAILS
 OPTIMIZE_OUTPUT_FOR_C  = YES
 EXTRACT_ALL            = YES
 EXTRACT_STATIC         = YES
 
-# GRAPHVIZ / CALL GRAPH CONFIGURATION
-GENERATE_LATEX         = NO
-GENERATE_MAN           = NO
-GENERATE_RTF           = NO
-GENERATE_XML           = NO
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES # Forces extraction of local file functions and prototypes
+EXTRACT_PACKAGE        = YES
+EXTRACT_PRIV_VIRTUAL   = YES
+EXTRACT_ANON_NSPACES   = YES
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+HIDE_UNDOC_NAMESPACES  = NO # Ensures unannotated kernel namespaces/subsystems are shown
+SHOW_USED_FILES        = YES
+SHOW_INCLUDE_FILES     = YES
 
-GENERATE_HTML          = YES
-HTML_DYNAMIC_SECTIONS  = NO
-HTML_CODE_FOLDING      = YES
-TOC_INCLUDE_HEADINGS   = 3
 
-# Graph / Visualization Settings (requires graphviz installed)
+# KERNEL-DOC / JAVADOC COMMENT FORMATTING & ALIASES
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+ALWAYS_DETAILED_PV     = YES
+MARKDOWN_SUPPORT       = YES
+
+ALIASES               += "param=\param" \
+                         "return=\return" \
+                         "returns=\return"
+
+
+# PREPROCESSOR & MACRO EXPANSION
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES # Strictly ON to preserve macro definitions in exit.c and prevent header parsing failures
+SEARCH_INCLUDES        = YES
+SKIP_FUNCTION_MACROS   = NO # Ensures macro definitions in exit.c and sched.h are extracted as documentation entities
+
+PREDEFINED             = "asmlinkage=" \
+                         "__latent_entropy=" \
+                         "__randomize_layout=" \
+                         "__kfifo_int512=" \
+                         "rcu_head=callback_head" \
+                         "__counted_by(x)=" \
+                         "__counted_by_or_null(x)=" \
+                         "__private=" \
+                         "__nonstring=" \
+                         "__copy_data(x)=" \
+                         "__struct_group(x...)=x" \
+                         "__cacheline_aligned=" \
+                         "__cacheline_aligned_in_smp=" \
+                         "____cacheline_aligned=" \
+                         "____cacheline_aligned_in_smp=" \
+                         "__read_mostly=" \
+                         "__ro_after_init=" \
+                         "__attribute__(x)=" \
+                         "__attribute_const__=" \
+                         "__user=" \
+                         "__rcu=" \
+                         "__aligned(x)=" \
+                         "__must_check=" \
+                         "__sched=" \
+                         "__always_inline=" \
+                         "noinline=" \
+                         "__printf(a,b)=" \
+                         "__noreturn=" \
+                         "__ref=" \
+                         "__init=" \
+                         "__meminit=" \
+                         "__maybe_unused=" \
+                         "__always_unused=" \
+                         "SYSCALL_DEFINE0(name)=long sys_##name(void)" \
+                         "SYSCALL_DEFINE1(name, ...)=long sys_##name(...)" \
+                         "SYSCALL_DEFINE2(name, ...)=long sys_##name(...)" \
+                         "SYSCALL_DEFINE3(name, ...)=long sys_##name(...)" \
+                         "SYSCALL_DEFINE4(name, ...)=long sys_##name(...)" \
+                         "SYSCALL_DEFINE5(name, ...)=long sys_##name(...)" \
+                         "SYSCALL_DEFINE6(name, ...)=long sys_##name(...)" \
+                         "COMPAT_SYSCALL_DEFINE1(name, ...)=long sys_##name(...)" \
+                         "COMPAT_SYSCALL_DEFINE2(name, ...)=long sys_##name(...)" \
+                         "COMPAT_SYSCALL_DEFINE3(name, ...)=long sys_##name(...)" \
+                         "COMPAT_SYSCALL_DEFINE4(name, ...)=long sys_##name(...)" \
+                         "COMPAT_SYSCALL_DEFINE5(name, ...)=long sys_##name(...)" \
+                         "COMPAT_SYSCALL_DEFINE6(name, ...)=long sys_##name(...)" \
+                         "__struct_group(TAG, NAME, ATTRS, MEMBERS...)=MEMBERS" \
+                         "struct_group(NAME, MEMBERS...)=MEMBERS" \
+                         "struct_group_attr(NAME, ATTRS, MEMBERS...)=MEMBERS" \
+                         "struct_group_tagged(TAG, NAME, MEMBERS...)=MEMBERS" \
+                         "EXPORT_SYMBOL(x)=" \
+                         "EXPORT_SYMBOL_GPL(x)=" \
+                         "DECLARE_BITMAP(x,y)=unsigned long x[y]" \
+                         "NETDATA_ALIGN=" \
+                         "__ASSEMBLY__=0" \
+                         "CONFIG_THREAD_INFO_IN_TASK=1" \
+                         "CONFIG_NUMA=1" \
+                         "CONFIG_SCHED_AUTOGROUP=1" \
+                         "CONFIG_SMP=1" \
+                         "CONFIG_PREEMPT_RT=1" \
+                         "CONFIG_SCHED_CORE=1" \
+                         "TASK_PFA_TEST(name, func)=bool task_##func(struct task_struct *p);" \
+                         "TASK_PFA_SET(name, func)=void task_set_##func(struct task_struct *p);" \
+                         "TASK_PFA_CLEAR(name, func)=void task_clear_##func(struct task_struct *p);" \
+                         "DECLARE_BITMAP(name,bits)=unsigned long name[bits];"
+
+
+# GRAPHING AND GRAPHVIZ DETAILS
 HAVE_DOT               = YES
-DOT_GRAPH_MAX_NODES    = 200
-MAX_DOT_GRAPH_DEPTH    = 3
+DOT_GRAPH_MAX_NODES    = 1000 # Large positive integer allows complete header trees without disabling DOT
+MAX_DOT_GRAPH_DEPTH    = 10   # Allows Graphviz to traverse deep header dependency trees
 DOT_IMAGE_FORMAT       = svg
 INTERACTIVE_SVG        = NO
 DOT_MULTI_TARGETS      = YES
+DOT_NUM_THREADS        = 4
 
 CLASS_DIAGRAMS         = NO
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
 CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
 GENERATE_LEGEND        = YES
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES
 
-# Directory & Include Visualizations
 SHOW_DIRECTORIES       = YES
 DIRECTORY_GRAPH        = YES
-ENABLE_PREPROCESSING   = YES
-SEARCH_INCLUDES        = YES
 INCLUDE_GRAPH          = YES
 INCLUDED_BY_GRAPH      = YES
+FORCE_LOCAL_INCLUDES   = NO # Ensures both quotes and angle-bracket includes (<linux/sched.h>) render in graph trees
 
-# parallel processing (CPU core count)
-DOT_NUM_THREADS        = 4
 
-# output dir setup
-OUTPUT_DIRECTORY       = .
-HTML_OUTPUT            = html
+# OUTPUT GENERATOR FORMATS
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_XML           = NO
 
-# Custom Project Header
-PROJECT_NAME           = "Multithreading"
-PROJECT_NUMBER         = "v7.0"
-PROJECT_BRIEF          = "Documentation via Doxygen and Graphviz"
+HTML_DYNAMIC_SECTIONS  = NO
+HTML_CODE_FOLDING      = YES
+TOC_INCLUDE_HEADINGS   = 3
 
-# Enable Left Sidepanel with Tree View Navigation
+
+# LEFT SIDEBAR AND TREEVIEW SETUP
 GENERATE_TREEVIEW      = YES
 TREEVIEW_WIDTH         = 250
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = YES
+SHOW_NAMESPACES        = YES
+SHOW_FILES             = YES
+SHOW_ENUMS             = YES
 
 SOURCE_BROWSER         = YES
 INLINE_SOURCES         = NO
