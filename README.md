@@ -38,7 +38,7 @@ Clone specific Linux kernel subsystems using sparse checkout at a specific versi
 Update the doxyfile configuration according to the need and execute it via  `doxygen <config-file-name> `, Then view generated documentation on the default browser
 
 ```bash
-    chmod +x doxygen_kernel_filter.sh
+    chmod +x doxygen_kernel_filter.sh   # execute script for code sanitation
     doxygen Doxyfile
     xdg-open html/index.html
 ```
