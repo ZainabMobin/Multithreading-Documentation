@@ -4,4 +4,5 @@ INPUT        += src/include/linux/sched.h \
                 src/kernel/exit.c \
                 src/kernel/exit.h \
                 src/kernel/kthread.c \
-                src/kernel/sched/core.c
+                src/kernel/sched/core.c \
+                MAINPAGE.md

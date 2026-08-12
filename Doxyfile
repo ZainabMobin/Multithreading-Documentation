@@ -6,6 +6,11 @@ OUTPUT_DIRECTORY       = .
 HTML_OUTPUT            = html
 
 
+# ARCHITECTURE DIAGRAM ON MAIN PAGE
+USE_MDFILE_AS_MAINPAGE = MAINPAGE.md
+IMAGE_PATH += ./images
+
+
 # INPUT FILES/ INCLUDE & EXCLUDE FILE PATHS
 @INCLUDE = input_files.txt
 @INCLUDE = include_path.txt
