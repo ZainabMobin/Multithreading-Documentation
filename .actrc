@@ -1,0 +1,2 @@
+-P ubuntu-latest=node-bookworm-act:local
+--pull=false

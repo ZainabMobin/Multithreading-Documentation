@@ -1,8 +1,17 @@
 INPUT        += src/include/linux/sched.h \
                 src/include/linux/kthread.h \
+                src/include/linux/sched/signal.h \
+                src/include/linux/signal.h \
+                src/include/linux/futex.h \
+                src/include/linux/sched/topology.h \
+                src/include/linux/sched/task.h \
+                src/kernel/sched/sched.h \
                 src/kernel/fork.c \
                 src/kernel/exit.c \
                 src/kernel/exit.h \
                 src/kernel/kthread.c \
                 src/kernel/sched/core.c \
+                src/kernel/signal.c \
+                src/kernel/futex/core.c \
+                src/kernel/sched/fair.c \
                 MAINPAGE.md

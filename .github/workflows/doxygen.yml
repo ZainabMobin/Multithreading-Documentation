@@ -15,7 +15,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-  deploy:
+  deploy-docs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -24,35 +24,45 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
         
-      - name: Sparse Checkout Linux Kernel Source (v7.0)
+      - name: Load Environment Variables
         run: |
-          mkdir -p src
-          cd src
-          git init
-          git remote add origin https://github.com/torvalds/linux.git
-          git config core.sparseCheckout true
-          git sparse-checkout set kernel include/linux include/uapi mm arch/x86/include
-          git fetch --filter=blob:none --depth=1 origin tag v7.0
-          git checkout FETCH_HEAD
-          cd ..
+          cat .env >> $GITHUB_ENV
           
       - name: Install Doxygen and Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
+      - name: Sparse Checkout Linux Kernel Source
+        run: |
+          rm -rf src
+          mkdir -p src
+          cd src
+          git init
+          git remote add origin "$KERNEL_REPO"
+          git config core.sparseCheckout true
+          git sparse-checkout set $KERNEL_SPARSE_DIRS 
+          git fetch --filter=blob:none --depth=1 origin tag "$KERNEL_TAG" 
+          git checkout FETCH_HEAD
+          cd ..
+        # unquoted $KERNEL_SPARSE_DIRS: folder names passed as separate arguments to git sparse-checkout set.
+          
       - name: Build Doxygen Documentation
         run: |
           chmod +x ./doxygen_kernel_filter.sh
-          rm -rf html/
-          doxygen Doxyfile
+          rm -rf html/          
+          doxygen Doxyfile          
           touch ./html/.nojekyll
 
       - name: Upload artifact
+        if: ${{ !env.ACT }}
+        # Only upload artifacts on GitHub actions, skip in local act
         uses: actions/upload-pages-artifact@v3
         with:
           path: './html'
 
       - name: Deploy to GitHub Pages
+        # only deploy on GitHub actions, not locally
+        if: ${{ !env.ACT }} 
         id: deployment
         uses: actions/deploy-pages@v4

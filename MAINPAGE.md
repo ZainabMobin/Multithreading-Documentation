@@ -1,3 +1,3 @@
-# Kernel Architecture Documentation
+# Module Architecture Documentation
 
-\image html Multithreading_architecture.drawio.svg "System Architecture Documentation" width=100%
+\image html Multithreading_architecture.drawio.svg "Module: Multithreading Architecture Documentation" width=100%

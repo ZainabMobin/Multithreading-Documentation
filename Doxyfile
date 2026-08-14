@@ -1,7 +1,7 @@
 # PROJECT DETAILS
 PROJECT_NAME           = "Multithreading"
-PROJECT_NUMBER         = "v7.0"
-PROJECT_BRIEF          = "Documentation via Doxygen and Graphviz"
+PROJECT_NUMBER         = $(KERNEL_TAG)
+PROJECT_BRIEF          = "Kernel source code documentation via Doxygen and Graphviz"
 OUTPUT_DIRECTORY       = .
 HTML_OUTPUT            = html
 

@@ -1,3 +1,4 @@
 /src
 /html
 *.log
+verify_act.sh
