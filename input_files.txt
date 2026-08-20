@@ -5,6 +5,9 @@ INPUT        += src/include/linux/sched.h \
                 src/include/linux/futex.h \
                 src/include/linux/sched/topology.h \
                 src/include/linux/sched/task.h \
+                src/include/uapi/linux/sched.h \
+                src/include/uapi/linux/sched/types.h \
+                src/include/linux/sched.h \
                 src/kernel/sched/sched.h \
                 src/kernel/fork.c \
                 src/kernel/exit.c \
@@ -13,5 +16,10 @@ INPUT        += src/include/linux/sched.h \
                 src/kernel/sched/core.c \
                 src/kernel/signal.c \
                 src/kernel/futex/core.c \
+                src/kernel/sched/stop_task.c \
+                src/kernel/sched/deadline.c \
+                src/kernel/sched/rt.c \
                 src/kernel/sched/fair.c \
-                MAINPAGE.md
+                src/kernel/sched/idle.c \
+                MAINPAGE.md \
+                FLAG.md 

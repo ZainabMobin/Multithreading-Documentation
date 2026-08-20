@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     git \
     ca-certificates \
+    python3 \
     && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -14,3 +15,6 @@ RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Set the default user back to node
 USER node
+
+# success message
+RUN echo " 🟩 Custom Docker image for Node.js 22 with sudo, git and ca-certificates created successfully 👊👊"

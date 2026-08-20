@@ -2,3 +2,4 @@
 /html
 *.log
 verify_act.sh
+flag_parse_test.py

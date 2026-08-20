@@ -1,4 +1,8 @@
 INCLUDE_PATH     += src/include \
                     src/arch/x86/include \
                     src/kernel \
-                    src/mm
+                    src/mm \
+                    src/include/uapi \
+                    src/arch/x86/include/uapi \
+                    src/kernel/futex \
+                    src/fs

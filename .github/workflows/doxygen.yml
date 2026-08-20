@@ -50,6 +50,8 @@ jobs:
       - name: Build Doxygen Documentation
         run: |
           chmod +x ./doxygen_kernel_filter.sh
+          chmod +x generate_flags.py
+          python3 generate_flags.py
           rm -rf html/          
           doxygen Doxyfile          
           touch ./html/.nojekyll

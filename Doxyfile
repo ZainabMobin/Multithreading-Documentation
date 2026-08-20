@@ -10,6 +10,9 @@ HTML_OUTPUT            = html
 USE_MDFILE_AS_MAINPAGE = MAINPAGE.md
 IMAGE_PATH += ./images
 
+# CONTAINS LEGEND IN SIDEBAR
+LAYOUT_FILE = DoxygenLayout.xml
+
 
 # INPUT FILES/ INCLUDE & EXCLUDE FILE PATHS
 @INCLUDE = input_files.txt
@@ -60,6 +63,7 @@ MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES # Strictly ON to preserve macro definitions in exit.c and prevent header parsing failures
 SEARCH_INCLUDES        = YES
 SKIP_FUNCTION_MACROS   = NO # Ensures macro definitions in exit.c and sched.h are extracted as documentation entities
+FULL_PATH_NAMES        = YES
 
 PREDEFINED             = "asmlinkage=" \
                          "__latent_entropy=" \
@@ -71,7 +75,6 @@ PREDEFINED             = "asmlinkage=" \
                          "__private=" \
                          "__nonstring=" \
                          "__copy_data(x)=" \
-                         "__struct_group(x...)=x" \
                          "__cacheline_aligned=" \
                          "__cacheline_aligned_in_smp=" \
                          "____cacheline_aligned=" \
@@ -82,7 +85,6 @@ PREDEFINED             = "asmlinkage=" \
                          "__attribute_const__=" \
                          "__user=" \
                          "__rcu=" \
-                         "__aligned(x)=" \
                          "__must_check=" \
                          "__sched=" \
                          "__always_inline=" \
@@ -94,6 +96,15 @@ PREDEFINED             = "asmlinkage=" \
                          "__meminit=" \
                          "__maybe_unused=" \
                          "__always_unused=" \
+                         "__aligned(x)=" \
+                         "__aligned_u64=uint64_t" \
+                         "__u64=uint64_t" \
+                         "__s64=int64_t" \
+                         "__u32=uint32_t" \
+                         "__s32=int32_t" \
+                         "__aligned_u32=uint32_t" \
+                         "__aligned_u16=uint16_t" \
+                         "__aligned_u8=uint8_t" \
                          "SYSCALL_DEFINE0(name)=long sys_##name(void)" \
                          "SYSCALL_DEFINE1(name, ...)=long sys_##name(...)" \
                          "SYSCALL_DEFINE2(name, ...)=long sys_##name(...)" \
@@ -113,7 +124,6 @@ PREDEFINED             = "asmlinkage=" \
                          "struct_group_tagged(TAG, NAME, MEMBERS...)=MEMBERS" \
                          "EXPORT_SYMBOL(x)=" \
                          "EXPORT_SYMBOL_GPL(x)=" \
-                         "DECLARE_BITMAP(x,y)=unsigned long x[y]" \
                          "NETDATA_ALIGN=" \
                          "__ASSEMBLY__=0" \
                          "CONFIG_THREAD_INFO_IN_TASK=1" \
@@ -122,10 +132,10 @@ PREDEFINED             = "asmlinkage=" \
                          "CONFIG_SMP=1" \
                          "CONFIG_PREEMPT_RT=1" \
                          "CONFIG_SCHED_CORE=1" \
-                         "TASK_PFA_TEST(name, func)=bool task_##func(struct task_struct *p);" \
-                         "TASK_PFA_SET(name, func)=void task_set_##func(struct task_struct *p);" \
-                         "TASK_PFA_CLEAR(name, func)=void task_clear_##func(struct task_struct *p);" \
-                         "DECLARE_BITMAP(name,bits)=unsigned long name[bits];"
+                         "TASK_PFA_TEST(name, func)=bool task_##func(struct task_struct *p)" \
+                         "TASK_PFA_SET(name, func)=void task_set_##func(struct task_struct *p)" \
+                         "TASK_PFA_CLEAR(name, func)=void task_clear_##func(struct task_struct *p)" \
+                         "DECLARE_BITMAP(name,bits)=unsigned long name[bits]"
 
 
 # GRAPHING AND GRAPHVIZ DETAILS
@@ -136,6 +146,7 @@ DOT_IMAGE_FORMAT       = svg
 INTERACTIVE_SVG        = NO
 DOT_MULTI_TARGETS      = YES
 DOT_NUM_THREADS        = 4
+DOT_CLEANUP            = YES
 
 CLASS_DIAGRAMS         = NO
 CLASS_GRAPH            = YES
