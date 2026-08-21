@@ -31,6 +31,7 @@ FILE_PATTERNS          = *.c *.h # Forces Doxygen to parse all .c and .h files e
 OPTIMIZE_OUTPUT_FOR_C  = YES
 EXTRACT_ALL            = YES
 EXTRACT_STATIC         = YES
+INLINE_INFO            = YES
 
 EXTRACT_LOCAL_CLASSES  = YES
 EXTRACT_LOCAL_METHODS  = YES # Forces extraction of local file functions and prototypes
@@ -65,6 +66,8 @@ SEARCH_INCLUDES        = YES
 SKIP_FUNCTION_MACROS   = NO # Ensures macro definitions in exit.c and sched.h are extracted as documentation entities
 FULL_PATH_NAMES        = YES
 
+UNDEFINE_BEFORE = __ASSEMBLY__
+
 PREDEFINED             = "asmlinkage=" \
                          "__latent_entropy=" \
                          "__randomize_layout=" \
@@ -98,13 +101,20 @@ PREDEFINED             = "asmlinkage=" \
                          "__always_unused=" \
                          "__aligned(x)=" \
                          "__aligned_u64=uint64_t" \
+                         "__aligned_u32=uint32_t" \
+                         "__aligned_u16=uint16_t" \
+                         "__aligned_u8=uint8_t" \
                          "__u64=uint64_t" \
                          "__s64=int64_t" \
                          "__u32=uint32_t" \
                          "__s32=int32_t" \
-                         "__aligned_u32=uint32_t" \
-                         "__aligned_u16=uint16_t" \
-                         "__aligned_u8=uint8_t" \
+                         "____cacheline_aligned_in_smp=" \
+                         "__packed=" \
+                         "__randomize_layout=" \
+                         "__no_randomize_layout=" \
+                         "__designated_init=" \
+                         "__struct_group(...)=MEMBERS" \
+                         "DECLARE_FLEX_ARRAY(T, name)=T name[]" \
                          "SYSCALL_DEFINE0(name)=long sys_##name(void)" \
                          "SYSCALL_DEFINE1(name, ...)=long sys_##name(...)" \
                          "SYSCALL_DEFINE2(name, ...)=long sys_##name(...)" \
@@ -125,7 +135,6 @@ PREDEFINED             = "asmlinkage=" \
                          "EXPORT_SYMBOL(x)=" \
                          "EXPORT_SYMBOL_GPL(x)=" \
                          "NETDATA_ALIGN=" \
-                         "__ASSEMBLY__=0" \
                          "CONFIG_THREAD_INFO_IN_TASK=1" \
                          "CONFIG_NUMA=1" \
                          "CONFIG_SCHED_AUTOGROUP=1" \

@@ -56,6 +56,13 @@ jobs:
           doxygen Doxyfile          
           touch ./html/.nojekyll
 
+      - name: Preview local deployment
+        if: ${{ env.ACT }}
+        run: |
+          echo "🌐 Preview your docs at: http://localhost:8080"
+          echo "Press CTRL+C in terminal when done."
+          python3 -m http.server 8080 --directory ./html
+
       - name: Upload artifact
         if: ${{ !env.ACT }}
         # Only upload artifacts on GitHub actions, skip in local act

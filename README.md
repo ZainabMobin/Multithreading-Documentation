@@ -106,5 +106,6 @@ Load custom local image via .actrc file, do not pull from remote registery,
 ```bash
 docker build -t node-bookworm-act:local . # Build the image <image_name:version> locally with sudo, git and ca-certificates configured 
 docker run --rm node-bookworm-act:local sudo apt-get update # run temp container and verify sudo is installed and passwordless
-act -j deploy-docs --reuse # run the container
+docker run --rm node-bookworm-act:local python3 --version # run temp container and verify sudo is installed and passwordless
+act -j deploy-docs --reuse # run act with implicit port binding in workflow, else with explicit port binding include --pull=false
 ```

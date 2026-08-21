@@ -17,4 +17,4 @@ RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER node
 
 # success message
-RUN echo " 🟩 Custom Docker image for Node.js 22 with sudo, git and ca-certificates created successfully 👊👊"
+RUN echo " 🟩 Custom Docker image for Node.js 22 with sudo, git, ca-certificates and python created successfully 👊👊"

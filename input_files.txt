@@ -21,5 +21,6 @@ INPUT        += src/include/linux/sched.h \
                 src/kernel/sched/rt.c \
                 src/kernel/sched/fair.c \
                 src/kernel/sched/idle.c \
+                src/kernel/sched/syscalls.c \
                 MAINPAGE.md \
                 FLAG.md 
