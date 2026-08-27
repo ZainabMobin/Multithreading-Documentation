@@ -5,4 +5,6 @@ INCLUDE_PATH     += src/include \
                     src/include/uapi \
                     src/arch/x86/include/uapi \
                     src/kernel/futex \
-                    src/fs
+                    src/fs \
+                    src-sched-ext/scheds/rust/scx_lavd/src/bpf \
+                    src-sched-ext/scheds/include

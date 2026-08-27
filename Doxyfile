@@ -144,7 +144,15 @@ PREDEFINED             = "asmlinkage=" \
                          "TASK_PFA_TEST(name, func)=bool task_##func(struct task_struct *p)" \
                          "TASK_PFA_SET(name, func)=void task_set_##func(struct task_struct *p)" \
                          "TASK_PFA_CLEAR(name, func)=void task_clear_##func(struct task_struct *p)" \
-                         "DECLARE_BITMAP(name,bits)=unsigned long name[bits]"
+                         "DECLARE_BITMAP(name,bits)=unsigned long name[bits]" \
+                         "CONFIG_SCHED_CLASS_EXT=1" \
+                         "CONFIG_BPF_SYSCALL=1" \
+                         "SCHED_EXT=7" \
+                         "SEC(x)=" \
+                         "__bpf_kfunc=" \
+                         "__bpf_kfunc_stubs=" \
+                         "SCX_OPS_DEFINE(name,...)=struct sched_ext_ops name" \
+                         "BPF_STRUCT_OPS(name,...)=int name(...)"
 
 
 # GRAPHING AND GRAPHVIZ DETAILS

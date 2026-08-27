@@ -5,8 +5,11 @@ INPUT        += src/include/linux/sched.h \
                 src/include/linux/futex.h \
                 src/include/linux/sched/topology.h \
                 src/include/linux/sched/task.h \
+                src/include/linux/sched/ext.h \
                 src/include/uapi/linux/sched.h \
                 src/include/uapi/linux/sched/types.h \
+                src/kernel/sched/ext.h \
+                src/kernel/sched/ext.c \
                 src/include/linux/sched.h \
                 src/kernel/sched/sched.h \
                 src/kernel/fork.c \
@@ -21,6 +24,11 @@ INPUT        += src/include/linux/sched.h \
                 src/kernel/sched/rt.c \
                 src/kernel/sched/fair.c \
                 src/kernel/sched/idle.c \
+                src/kernel/bpf/bpf_struct_ops.c \
+                src-sched-ext/scheds/rust/scx_lavd/src/bpf/main.bpf.c \
+                src-sched-ext/scheds/rust/scx_lavd/src/bpf/lat_cri.bpf.c \
+                src-sched-ext/scheds/rust/scx_lavd/src/bpf/lavd.bpf.h \
+                src-sched-ext/scheds/rust/scx_lavd/src/bpf/intf.h
                 src/kernel/sched/syscalls.c \
                 MAINPAGE.md \
-                FLAG.md 
+                FLAG.md
