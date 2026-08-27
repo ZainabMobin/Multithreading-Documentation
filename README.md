@@ -109,17 +109,3 @@ docker run --rm node-bookworm-act:local sudo apt-get update # run temp container
 docker run --rm node-bookworm-act:local python3 --version # run temp container and verify sudo is installed and passwordless
 act -j deploy-docs --reuse # run act with implicit port binding in workflow, else with explicit port binding include --pull=false
 ```
-
-
-## Added sched-ext lavd-scx
-
-File | Purpose
--|-
-src/include/linux/sched/ext.h| Core sched-ext public header & ops
-src/kernel/sched/ext.h | Core internal sched-ext data structures
-src/kernel/sched/ext.c | Engine bridging core kernel to BPF schedulers
-src/kernel/sched/syscalls.c | Contains sys_sched_setscheduler for SCHED_EXT
-src/kernel/bpf/bpf_struct_ops.c | Resolves BPF ops registration & dispatch
-sched-ext-repo/scheds/c/scx_lavd.bpf.c | LAVD BPF kernel-space scheduler implementation
-sched-ext-repo/scheds/c/scx_lavd.c | LAVD user-space control program
-sched-ext-repo/scheds/c/scx_lavd.h | Shared structures between LAVD & kernel

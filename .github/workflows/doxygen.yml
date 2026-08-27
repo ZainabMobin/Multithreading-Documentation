@@ -47,21 +47,6 @@ jobs:
           cd ..
         # unquoted $KERNEL_SPARSE_DIRS: folder names passed as separate arguments to git sparse-checkout set.
           
-        # Clone the sched-ext / scx repository for scx_lavd source files
-        # Only pull directories referenced in Doxyfile input and include paths
-      - name: Clone sched-ext (scx) Repository
-        run: |
-          rm -rf src-sched-ext
-          mkdir -p src-sched-ext
-          cd src-sched-ext
-          git init
-          git remote add origin "$SCHED_EXT_REPO"
-          git config core.sparseCheckout true
-          git sparse-checkout set $SCHED_EXT_SPARSE_DIRS
-          git fetch --filter=blob:none --depth=1 origin main
-          git checkout FETCH_HEAD
-          cd ..
-
       - name: Build Doxygen Documentation
         run: |
           chmod +x ./doxygen_kernel_filter.sh
@@ -74,10 +59,9 @@ jobs:
       - name: Preview local deployment
         if: ${{ env.ACT }}
         run: |
-          echo "🌐 Preview your docs at: http://localhost:8088"
-          fuser -k 8088/tcp || true
+          echo "🌐 Preview your docs at: http://localhost:8080"
           echo "Press CTRL+C in terminal when done."
-          python3 -m http.server 8088 --directory ./html
+          python3 -m http.server 8080 --directory ./html
 
       - name: Upload artifact
         if: ${{ !env.ACT }}
